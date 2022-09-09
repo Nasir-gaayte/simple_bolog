@@ -1,0 +1,18 @@
+{% extends "theblog/home.html" %}
+{% block title %} Update The Post {% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+   <form style="background-color: rgb(255, 243, 243);" method="POST">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary">Update</button>
+   </form>
+   <br>
+   <br>
+   <button type="button" class="btn btn-dark "><a href="{% url 'home' %}">Back</a></button>
+</div>
+<br><br>
+<h1>thanks</h1>
+  
+{% endblock content %}

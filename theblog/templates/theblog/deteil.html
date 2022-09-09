@@ -1,0 +1,17 @@
+{% extends "theblog/home.html" %}
+{% block content %}
+<div class="container">
+    <h1><span>{{post.title}}</span></h1><br>
+    <small>{{post.author}}<button type="button" class="btn btn-light"><a href="{% url 'update_post' post.pk %}">Update</a></button></small>
+    <hr>
+    <span>{{post.body}}</span>
+
+    <br>
+    <br>
+    <button type="button" class="btn btn-dark"><a href="{% url 'home' %}">Back</a></button>
+
+</div>
+<br><br>
+<h1>thanks</h1>
+  
+{% endblock content %}
