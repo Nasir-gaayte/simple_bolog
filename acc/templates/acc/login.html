@@ -1,0 +1,16 @@
+{% extends "theblog/home.html" %}
+{% block title %}LOGIN{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container">
+    <h1>LOGIN</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{login_form|crispy}}
+        <button type="submit" class="btn btn-outline-success">LOGIN</button>
+    </form>
+    <div>
+      <p>To Registre in the website cleck <a href="{% url 'register' %}">here..</a></p>
+    </div>
+  </div>
+{% endblock content %}

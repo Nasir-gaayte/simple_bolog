@@ -1,5 +1,5 @@
 {% extends "theblog/home.html" %}
-{% block title %} Add New Post {% endblock title %}
+{% block title %} Add Category {% endblock title %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
@@ -7,7 +7,7 @@
    <form style="background-color: rgb(255, 243, 243);" method="POST">
     {% csrf_token %}
     {{form|crispy}}
-    <button type="submit" class="btn btn-outline-success">Post</button>
+    <button type="submit" class="btn btn-outline-success">add</button>
    </form>
    <br>
    <br>

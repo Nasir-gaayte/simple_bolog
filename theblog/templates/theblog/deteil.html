@@ -1,19 +1,23 @@
 {% extends "theblog/home.html" %}
+{% block title %} {{post.title_tag}} {% endblock title %}
 {% block content %}
 <div style="background-color: rgb(248, 210, 210);" class="container">
-    <h1><span>{{post.title}}</span></h1><br>
-    <small>{{post.author}}
-        <button type="button" class="btn btn-light"><a href="{% url 'update_post' post.pk %}">Update</a></button>
-        <button type="button" class="btn btn-light"><a href="{% url 'delete_post' post.pk %}">Delete</a></button>
+    <h1><span>{{post.title}}--{{post.category}}</span></h1><br>
+    <small>{{post.author}}-post in{{post.post_date}}:<br>
+        {% if user.is_authenticated %}
+        <button type="button" class="btn btn-outline-primary"><a href="{% url 'update_post' post.pk %}">Update</a></button>
+        <button type="button" class="btn btn-outline-danger"><a href="{% url 'delete_post' post.pk %}">Delete</a></button>
+        {%endif%}
     </small>
     <hr>
     <span>{{post.body}}</span>
+    
 
     <br>
     <br>
     
 </div>
-<button type="button" class="btn btn-dark"><a href="{% url 'home' %}">Back</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="{% url 'home' %}">Back</a></button>
 <br><br>
 <h1>thanks</h1>
   

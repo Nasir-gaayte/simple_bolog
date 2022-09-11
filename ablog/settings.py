@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'theblog',
+    'acc',
 ]
 CRISPY_FORMS_PACK = 'bootstrap4'
 
@@ -55,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ablog.urls'
+LOGIN_URL = '/login'
 
 TEMPLATES = [
     {

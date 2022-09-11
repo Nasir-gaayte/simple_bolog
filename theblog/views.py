@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
-from .models import Post
-from .forms import PostForm
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
+from .models import Post, Category
+from .forms import CategoryForm, PostForm 
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -13,13 +14,14 @@ from django.urls import reverse_lazy
 class HomeView(ListView):
     model = Post
     template_name = 'theblog/home.html'
+    ordering = ['-post_date']
     
 
 class Detail(DetailView):
     model = Post
     template_name = 'theblog/deteil.html'   
     
-    
+@login_required    
 def add_post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -32,8 +34,21 @@ def add_post(request):
     form = PostForm()
     return render(request,'theblog/add_post.html',{'form':form})    
  
-        
-        
+
+@login_required    
+def add_cotegory(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('home')
+        else:
+            messages.error(request,'wrong')
+            return redirect('add_category')
+    form = CategoryForm()
+    return render(request,'theblog/add_category.html',{'form':form})    
+      
+       
 class UpdatePostView(UpdateView):
     model= Post
     template_name = 'theblog/update_post.html'    
