@@ -4,12 +4,14 @@
 {% block content %}
 <div class="container">
    {% if user.is_authenticated %}
-      <form style="background-color: rgb(255, 243, 243);" method="POST">
-      {{post.title}}
-      {% csrf_token %}
-      
-      <button type="submit" class="btn btn-primary">Delete</button>
-      </form>
+      {% if user.id == post.author.id %}
+         <form style="background-color: rgb(255, 243, 243);" method="POST">
+         {{post.title}}
+         {% csrf_token %}
+         
+         <button type="submit" class="btn btn-primary">Delete</button>
+         </form>
+      {%endif%}
    {%else%}
    <h1>you,er not Login/h1>
    {%endif%}

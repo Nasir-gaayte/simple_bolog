@@ -1,0 +1,25 @@
+{% extends "theblog/home.html" %}
+{% block title %} Category {% endblock title %}
+{% block content %}
+<div style="background-color: rgb(248, 210, 210);" class="container">
+    <h1><span>{{post.category.name}}</span></h1><br>
+    <small><br>
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <h1>{{category.name}}</h1>
+                <button type="button" class="btn btn-outline-primary"><a href="#">Update</a></button>
+                <button type="button" class="btn btn-outline-danger"><a href="#">Delete</a></button>
+            {%endif%}
+        {%endif%}
+    </small>
+    <hr>
+  
+    <br>
+    <br>
+    
+</div>
+<button type="button" class="btn btn-outline-dark"><a href="{% url 'home' %}">Back</a></button>
+<br><br>
+<h1>thanks</h1>
+  
+{% endblock content %}

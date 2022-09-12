@@ -12,6 +12,10 @@
    <br>
    <br>
    <button type="button" class="btn btn-outline-dark "><a href="{% url 'home' %}">Back</a></button>
+   <script>
+      var name = "{{user.id}}";
+      document.getElementById("user").value = name;
+   </script>
    {%endif%}
 </div>
 <br><br>

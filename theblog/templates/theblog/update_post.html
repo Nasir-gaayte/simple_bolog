@@ -4,11 +4,13 @@
 {% block content %}
 <div class="container">
    {% if user.is_authenticated %}
-   <form style="background-color: rgb(255, 243, 243);" method="POST">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-primary">Update</button>
-   </form>
+      {% if user.id == post.author.id %}
+         <form style="background-color: rgb(255, 243, 243);" method="POST">
+         {% csrf_token %}
+         {{form|crispy}}
+         <button type="submit" class="btn btn-primary">Update</button>
+         </form>
+         {%endif%}
    {%else%}
    <h1>you,er not Login/h1>
    {%endif%}

@@ -16,10 +16,22 @@ class HomeView(ListView):
     template_name = 'theblog/home.html'
     ordering = ['-post_date']
     
+def CategoryView(request, cats):
+    category_posts = Post.objects.filter(category = cats)
+    return render(request,'theblog/category_list.html',{'cats':cats, 'category_posts':category_posts})
+   
+
 
 class Detail(DetailView):
     model = Post
-    template_name = 'theblog/deteil.html'   
+    template_name = 'theblog/deteil.html'
+
+
+class DetailCategory(DetailView):
+    model = Category
+    template_name = 'theblog/detail_category.html'       
+       
+       
     
 @login_required    
 def add_post(request):

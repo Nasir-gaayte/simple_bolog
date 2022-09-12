@@ -1,0 +1,31 @@
+{% extends "theblog/home.html" %}
+{% block title %} list viwe category{% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Category</h1>
+    {% if user.is_authenticated %}
+<h3><a href="{% url 'add_category' %}">Add New Category</a></h3>
+{%endif%}
+<ul>
+    {% for post in category_posts %}
+     <li>
+         <h1><a href="{% url 'detail_category' category.id %}">{{category.name}}</a></h1><br>
+         {{post.catgory}}
+         {{post.post_date}}
+        <small>
+            {% if user.is_authenticated %}
+                
+                    <button type="button" class="btn btn-outline-primary"><a href="#">Update</a></button>
+                    <button type="button" class="btn btn-outline-danger"><a href="#">Delete</a></button>
+               
+            {%endif%}
+            
+        </li><hr><br>
+        {% endfor %}
+    </ul>
+</div>   
+</div>
+</div>
+
+
+{% endblock content %}
