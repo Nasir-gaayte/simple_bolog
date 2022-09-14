@@ -14,15 +14,30 @@
         {%endif%}
     </small>
     <hr>
-    <span>{{post.body}}</span>
+    <span>{{post.body|safe}}</span>
     
 
     <br>
     <br>
-    
+    {% if user.is_authenticated %}
+    <form action="{% url 'like_post' post.pk %}" method="POST">
+        {% csrf_token %}
+        {% if liked %}
+        <button type="submit" name="post_id" class="btn btn-danger btn-sm" value="{{post.id}}" >UnLike</button> 
+        {% else %}
+        <button type="submit" name="post_id" class="btn btn-primary btn-sm" value="{{post.id}}" >Like</button>
+        {%endif%}
+        
+        - {{total_likes}} Likes
+    </form>
+    {% else %}
+    <small> you must login to like or unlike the post ????</small>
+    {%endif%}
 </div>
 <button type="button" class="btn btn-outline-dark"><a href="{% url 'home' %}">Back</a></button>
 <br><br>
+
+
 <h1>thanks</h1>
   
 {% endblock content %}

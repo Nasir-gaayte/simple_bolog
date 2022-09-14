@@ -1,11 +1,14 @@
 {% extends "theblog/home.html" %}
 {% block title %} Add New Post {% endblock title %}
 {% load crispy_forms_tags %}
+
+
 {% block content %}
 <div class="container">
    {% if user.is_authenticated %}
    <form style="background-color: rgb(255, 243, 243);" method="POST">
     {% csrf_token %}
+    {{form.media}}
     {{form|crispy}}
     <button type="submit" class="btn btn-outline-success">Post</button>
    </form>
