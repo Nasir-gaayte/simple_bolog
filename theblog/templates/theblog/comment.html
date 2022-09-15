@@ -1,5 +1,5 @@
 {% extends "theblog/home.html" %}
-{% block title %} Add New Post {% endblock title %}
+{% block title %} Comment {% endblock title %}
 {% load crispy_forms_tags %}
 
 
@@ -10,15 +10,12 @@
     {% csrf_token %}
     {{form.media}}
     {{form|crispy}}
-    <button type="submit" class="btn btn-outline-success">Post</button>
+    <button type="submit" class="btn btn-outline-success">comment</button>
    </form>
    <br>
    <br>
    <button type="button" class="btn btn-outline-dark "><a href="{% url 'home' %}">Back</a></button>
-   <script>
-      var name = "{{user.id}}";
-      document.getElementById("user").value = name;
-   </script>
+   
    {%endif%}
 </div>
 <br><br>

@@ -3,6 +3,11 @@
 {% block content %}
 <div style="background-color: rgb(248, 210, 210);" class="container">
     <h1><span>{{post.title}}--{{post.category}}</span></h1><br>
+    <br>
+    
+    {{post.header_image }}
+    <br>
+    <br>
     <small>{{post.author}}-post in{{post.post_date}}:<br>
         user {{user.id}}
         author {{post.author.id}}
@@ -33,6 +38,21 @@
     {% else %}
     <small> you must login to like or unlike the post ????</small>
     {%endif%}
+    <br>
+    <h2>commets..</h2>
+    {% if not post.commnets.all %}
+                comment <a href="{% url 'comment' %}">here..</a>
+    {% else %}
+        {% for comment in post.comments.all %}
+        <strong>
+            {{comment.name}}
+            {{comment.date_added}}
+        </strong>
+        <p>
+            {{comment.body}}
+        </p>            
+        {%endfor%}
+    {%endif%}    
 </div>
 <button type="button" class="btn btn-outline-dark"><a href="{% url 'home' %}">Back</a></button>
 <br><br>

@@ -3,13 +3,19 @@ from multiprocessing import context
 from nntplib import ArticleInfo
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
-from .models import Post, Category
+from .models import Post, Category,Comment
 from .forms import CategoryForm, PostForm 
 from django.contrib import messages
 from django.urls import reverse_lazy,reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+
+
 # Create your views here.
+class CommentView(CreateView):
+    model= Comment
+    template_name= 'theblog/comment.html'
+    fields= ("post","name", "body")
 
 def LikeView(request, pk):
     post = get_object_or_404(Post, id= request.POST.get('post_id'))
