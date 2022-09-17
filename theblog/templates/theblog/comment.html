@@ -8,7 +8,7 @@
    {% if user.is_authenticated %}
    <form style="background-color: rgb(255, 243, 243);" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.media}}
+    
     {{form|crispy}}
     <button type="submit" class="btn btn-outline-success">comment</button>
    </form>

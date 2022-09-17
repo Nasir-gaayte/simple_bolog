@@ -4,7 +4,7 @@ from nntplib import ArticleInfo
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from .models import Post, Category,Comment
-from .forms import CategoryForm, PostForm 
+from .forms import CategoryForm, CommentForm, PostForm ,CommentForm 
 from django.contrib import messages
 from django.urls import reverse_lazy,reverse
 from django.contrib.auth.decorators import login_required
@@ -14,8 +14,22 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 class CommentView(CreateView):
     model= Comment
+    form_class = CommentForm
+    # fields = ("name","body")
     template_name= 'theblog/comment.html'
-    fields= ("post","name", "body")
+    def form_vaild(self,form):
+        form.instance.post.id = self.kwargs['pk']
+        return super().form_vaild(form)
+     
+
+# def add_comment(request):
+#     if request.method == "POST":
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     form = CommentForm()
+#     return render(request,'theblog/comment.html',{'form':form})        
+    
 
 def LikeView(request, pk):
     post = get_object_or_404(Post, id= request.POST.get('post_id'))

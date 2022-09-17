@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from theblog import views
 
 urlpatterns = [
     path('',views.HomeView.as_view(),name='home'),
@@ -11,5 +11,6 @@ urlpatterns = [
     path('detail_category/<int:pk>/',views.DetailCategory.as_view(),name='detail_category'),
     path('category_list/<str:cats>/',views.CategoryView,name='category_list'),
     path('like/<int:pk>',views.LikeView,name='like_post'),
-    path('comment/',views.CommentView.as_view(),name='comment'),
+    path('comment/<int:pk>/',views.CommentView.as_view(),name='comment'),
+    # path('comment/',views.add_comment,name='comment'),
 ]

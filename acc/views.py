@@ -1,11 +1,14 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, RegisterUpdateForm, ChangePasswordForm
 from django.contrib.auth import login, logout,authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-
+from django.contrib.auth.forms import UserChangeForm
 # Create your views here.
-
+from django.views import generic
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
+from django.contrib.auth.models import User
 
 def register_request(request):
     if request.method == "POST":
@@ -47,3 +50,26 @@ def login_req(request):
 def logout_request(request):
     logout(request)
     return redirect('home')    
+
+
+
+class UserEditView(generic.UpdateView):
+    
+    form_class = RegisterUpdateForm
+    template_name = 'acc/edit_profile.html'
+    success_url = reverse_lazy('home')
+    
+   
+    
+    def get_object(self):
+        return self.request.user
+    
+    
+    
+class UserpasswordChange(generic.UpdateView):
+    form_class= ChangePasswordForm
+    template_name= 'acc/change_password.html'
+    success_url = reverse_lazy('home')  
+    
+    def get_object(self):
+        return self.request.user  

@@ -39,20 +39,23 @@
     <small> you must login to like or unlike the post ????</small>
     {%endif%}
     <br>
-    <h2>commets..</h2>
-    {% if not post.commnets.all %}
-                comment <a href="{% url 'comment' %}">here..</a>
-    {% else %}
-        {% for comment in post.comments.all %}
-        <strong>
-            {{comment.name}}
-            {{comment.date_added}}
-        </strong>
-        <p>
-            {{comment.body}}
-        </p>            
-        {%endfor%}
-    {%endif%}    
+    
+    <div>
+        <h2>commets..</h2>
+        {% if not post.comments.all %}
+        comment <a href="{% url 'comment' post.pk %}">here..</a><br>
+        <hr>
+            {% for comment in post.comments.all %}
+            <strong> 
+                {{comment.name}}
+                {{comment.date_added}}
+            </strong>
+            <p>
+                {{comment.body}}
+            </p>            
+            {%endfor%}
+        {%endif%}    
+    </div>
 </div>
 <button type="button" class="btn btn-outline-dark"><a href="{% url 'home' %}">Back</a></button>
 <br><br>
